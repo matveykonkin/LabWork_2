@@ -17,6 +17,18 @@ public:
     bool isAlive() const;
     void output() const;
     virtual void useUniqueAbility();
+    const std::string& getName() const {
+        return name;
+    }
+    int getHealth() const {
+        return health;
+    }
+    int getAttack() const {
+        return attack;
+    }
+    const std::string& getAbilityName() const {
+        return uniqueAbility;
+    }
 };
 
 #endif 
