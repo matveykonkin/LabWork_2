@@ -3,7 +3,7 @@
 
 class Robot : public Entity {
     public:
-        Robot() : Entity("Robot", 120, 25, "Перезагрузка") {}
+        Robot() : Entity("Robot", 120, 25, "Перезагрузка", 200) {}
     
         void useUniqueAbility() override {
             std::cout << name << " использует способность: " << uniqueAbility << " (восстанавливает здоровье)" << std::endl;

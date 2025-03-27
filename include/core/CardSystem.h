@@ -16,6 +16,7 @@ public:
     int getHealth() const;  
     int getAttack() const;  
     const std::string& getAbilityName() const;  
+    int getPrice() const;
 };  
 
 #endif  

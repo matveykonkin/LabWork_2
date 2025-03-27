@@ -3,10 +3,12 @@
 
 class CyberZombi : public Entity {
     public:
-        CyberZombi() : Entity("Cyber Zombi", 150, 25, "Взлом") {}
+        CyberZombi() : Entity("Cyber Zombi", 150, 25, "Взлом", 230) {}
     
-        void useUniqueAbility() override {
+        void useUniqueAbility(Entity* target) override {
             std::cout << name << " использует способность: " << uniqueAbility << " (отключает способности противника)" << std::endl;
-            // Логика отключения способностей противника
+            if (auto* enemy = dynamic_cast<Entity*>(target)) {
+                enemy->setAbilitiesLocked(true); 
+            }
         }
     };

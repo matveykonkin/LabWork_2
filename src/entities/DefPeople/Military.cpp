@@ -1,12 +1,14 @@
 #include "Military.h"
+#include "Entity.h"
 #include <iostream>
 
 class Soldier : public Entity {
     public:
-        Soldier() : Entity("Soldier", 120, 18, "Штурм") {}
+        Soldier() : Entity("Soldier", 120, 18, "Штурм", 185) {}
     
-        void useUniqueAbility() override {
-            std::cout << name << " использует способность: " << uniqueAbility << " (наносит урон и снижает защиту противника)" << std::endl;
-            // Логика снижения защиты противника
+        void useUniqueAbility(Entity* target) override {
+            std::cout << name << " использует способность: " << uniqueAbility << " (наносит урон и снижает атаку противника)" << std::endl;
+            target->takeDamage(attack);
+            target->setAttack(target->getAttack() - 10);
         }
     };

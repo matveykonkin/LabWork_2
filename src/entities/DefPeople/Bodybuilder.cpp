@@ -3,7 +3,7 @@
 
 class Bodybuilder : public Entity {
     public:
-        Bodybuilder() : Entity("Bodybuilder", 150, 15, "Суперсила") {}
+        Bodybuilder() : Entity("Bodybuilder", 150, 15, "Суперсила", 210) {}
     
         void useUniqueAbility() override {
             std::cout << name << " использует способность: " << uniqueAbility << " (удваивает урон)" << std::endl;

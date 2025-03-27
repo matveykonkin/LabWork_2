@@ -3,7 +3,7 @@
 
 class ZombiPigeon : public Entity {
     public:
-        ZombiPigeon() : Entity("Zombi Pigeon", 60, 10, "Посылка") {}
+        ZombiPigeon() : Entity("Zombi Pigeon", 60, 10, "Посылка", 100) {}
     
         void useUniqueAbility() override {
             std::cout << name << " использует способность: " << uniqueAbility << " (восстанавливает здоровье)" << std::endl;

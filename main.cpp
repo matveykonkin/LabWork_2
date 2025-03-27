@@ -1,29 +1,28 @@
-#include "ZombiPolice.h" 
-#include "ZombiStudent.h" 
-#include "CardSystem.h"  
+#include "ZombiPolice.h"
+#include "ZombiStudent.h"
+#include "CardSystem.h"
 #include "BattleSystem.h"
 
-int main() {  
-    ZombiPolice zombiPolice;  
-    Card ZombiPoliceCard(zombiPolice);  
-    ZombiPoliceCard.render(); 
+int main() {
+    ZombiPolice zombiPolice;
+    Card zombiPoliceCard(zombiPolice);
+    zombiPoliceCard.render();
 
     ZombiStudent zombiStudent;
-    Card ZombiStudentCard(zombiStudent);
-    ZombiStudentCard.render();
+    Card zombiStudentCard(zombiStudent);
+    zombiStudentCard.render();
 
-    ZombiPolice player1;
-    ZombiStudent player2;  
+    // Режим PVP
+    ZombiPolice pvpPlayer1;
+    ZombiStudent pvpPlayer2;
+    BattleSystem pvpBattle(pvpPlayer1, pvpPlayer2);
+    pvpBattle.startBattle(); 
 
-    BattleSystem battle(player1, player2);
-    battle.startBattle(false);  // false = режим PvP
+    // Режим PVE
+    ZombiPolice pvePlayer;
+    ZombiStudent pveEnemy;
+    BattleSystem pveBattle(pvePlayer, pveEnemy);
+    pveBattle.startBattle(); 
 
-    ZombiPolice player;
-    ZombiStudent enemy;  
-
-    BattleSystem battle(player, enemy);
-    battle.startBattle(true);  // true = режим PvE
-
-    return 0;  
-}  
-
+    return 0;
+}

@@ -7,7 +7,8 @@ void Card::render() const {
     std::cout << "Карта: " << entity.getName() << "\n"  
               << "Здоровье: " << entity.getHealth() << "\n"  
               << "Атака: " << entity.getAttack() << "\n"  
-              << "Способность: " << entity.getAbilityName() << "\n\n";  
+              << "Способность: " << entity.getAbilityName() << "\n"
+              << "Цена: " << entity.getPrice() << "\n\n";  
 }  
 
 const std::string& Card::getName() const { 
@@ -21,4 +22,7 @@ int Card::getAttack() const {
 }  
 const std::string& Card::getAbilityName() const { 
     return entity.getAbilityName();
+}  
+int Card::getPrice() const { 
+    return entity.getPrice();
 }  

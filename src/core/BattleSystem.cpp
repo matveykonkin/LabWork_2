@@ -1,56 +1,89 @@
 #include "BattleSystem.h"
+#include "Player.h"
+#include "AI.h"
+#include "Entity.h"
+#include <iostream>
+#include <limits>
 
-BattleSystem::BattleSystem(Entity& p1, Entity& p2) 
-    : player1(p1), player2(p2) {}
+BattleSystem::BattleSystem(Entity& p1, Entity& p2, bool isPvP) 
+    : player1(p1), player2(p2), isPvPMode(isPvP) {}
 
-void BattleSystem::startBattle(bool isPlayerVsAI) {
-    std::cout << "Бой начался!\n";
-    while (player1.isAlive() && player2.isAlive()) {
-        playerTurn(player1, player2, player1UsedAbility);
-        if (!player2.isAlive()) break;
+void BattleSystem::startBattle() {
+    std::cout << "=== БОЙ НАЧАЛСЯ ===\n";
+    std::cout << player1.getName() << " vs " << player2.getName() << "\n\n";
 
-        if (isPlayerVsAI) {
-            aiTurn(player2, player1);
+    while (!isBattleOver()) {
+        if (auto* player = dynamic_cast<Player*>(&player1)) {
+            playerTurn(*player, player2);
+        } else if (auto* ai = dynamic_cast<AI*>(&player1)) {
+            aiTurn(*ai, player2);
+        }
+
+        if (isBattleOver()) break;
+
+        if (isPvPMode) {
+            if (auto* player = dynamic_cast<Player*>(&player2)) {
+                playerTurn(*player, player1);
+            }
         } else {
-            playerTurn(player2, player1, player2UsedAbility);
+            if (auto* ai = dynamic_cast<AI*>(&player2)) {
+                aiTurn(*ai, player1);
+            }
         }
     }
 
-    std::cout << (player1.isAlive() ? player1.getName() : player2.getName()) 
-              << " побеждает!\n";
+    Entity& winner = player1.isAlive() ? player1 : player2;
+    std::cout << "\n=== " << winner.getName() << " ПОБЕДИЛ! ===\n";
 }
 
-void BattleSystem::playerTurn(Entity& attacker, Entity& defender, bool& abilityUsed) {
-    std::cout << "\nХод " << attacker.getName() << ":\n";
-    std::cout << "1. Атака\n";
-    if (!abilityUsed) {
-        std::cout << "2. Использовать способность\n";
+void BattleSystem::playerTurn(Player& player, Entity& enemy) {
+    std::cout << "\n[Ход " << player.getName() << "]\n";
+    std::cout << "1. Атака (" << player.getAttack() << " урона)\n";
+    if (player.canUseAbility()) {
+        std::cout << "2. Использовать способность: " << player.getAbilityName() << "\n";
     }
 
     int choice;
-    std::cin >> choice;
-
-    if (choice == 2 && !abilityUsed) {
-        attacker.useUniqueAbility();
-        abilityUsed = true;
-    } else {
-        defender.takeDamage(attacker.getAttack());
-        std::cout << attacker.getName() << " атакует! " 
-                  << defender.getName() << " теряет " 
-                  << attacker.getAttack() << " HP.\n";
+    while (true) {
+        std::cin >> choice;
+        if (std::cin.fail() || (choice != 1 && (choice != 2 || !player.canUseAbility()))) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Неверный ввод. Выберите 1 или 2: ";
+            continue;
+        }
+        break;
     }
+
+    if (choice == 2) {
+        player.useUniqueAbility();
+        player.markAbilityUsed();
+        std::cout << player.getName() << " использует " << player.getAbilityName() << "!\n";
+    } else {
+        enemy.takeDamage(player.getAttack());
+        std::cout << player.getName() << " атакует! " 
+                  << enemy.getName() << " теряет " 
+                  << player.getAttack() << " HP.\n";
+    }
+
+    std::cout << enemy.getName() << ": " << enemy.getHealth() << "/" << enemy.getMaxHealth() << " HP\n";
 }
 
-void BattleSystem::aiTurn(Entity& ai, Entity& player) {
-    std::cout << "\nХод " << ai.getName() << " (AI):\n";
-    
-    if (!player2UsedAbility && rand() % 2 == 0) {  
-        ai.useUniqueAbility();
-        player2UsedAbility = true;
+void BattleSystem::aiTurn(AI& ai, Entity& player) {
+    std::cout << "\n[Ход " << ai.getName() << " (AI)]\n";
+    ai.makeMove(player);
+
+    if (ai.getAbilityUsed()) {
+        std::cout << ai.getName() << " использует " << ai.getAbilityName() << "!\n";
     } else {
-        player.takeDamage(ai.getAttack());
         std::cout << ai.getName() << " атакует! " 
-                  << player.getName() << " теряет " 
-                  << ai.getAttack() << " HP.\n";
+                 << player.getName() << " теряет " 
+                 << ai.getAttack() << " HP.\n";
     }
+
+    std::cout << player.getName() << ": " << player.getHealth() << "/" << player.getMaxHealth() << " HP\n";
+}
+
+bool BattleSystem::isBattleOver() const {
+    return !player1.isAlive() || !player2.isAlive();
 }

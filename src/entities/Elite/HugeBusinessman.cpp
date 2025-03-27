@@ -1,12 +1,13 @@
 #include "HugeBusinessman.h"
+#include "CoinSystem.h"
 #include <iostream>
 
-class Businessman : public Entity {
+class HugeBusinessman : public Entity {
     public:
-        Businessman() : Entity("Businessman", 90, 12, "Инвестиция") {}
+        HugeBusinessman() : Entity("HugeBusinessman", 90, 12, "Инвестиция", 135) {}
     
-        void useUniqueAbility() override {
+        void HugeBusinessman::useUniqueAbility(CoinSystem coinSystem) {
             std::cout << name << " использует способность: " << uniqueAbility << " (увеличивает доход от монет)" << std::endl;
-            // Логика увеличения дохода
+            coinSystem.setIncomeMultiplier(1.2);
         }
     };

@@ -3,7 +3,7 @@
 
 class ZombiWolf : public Entity {
     public:
-        ZombiWolf() : Entity("Zombi Wolf", 120, 25, "Одиночка") {}
+        ZombiWolf() : Entity("Zombi Wolf", 120, 25, "Одиночка", 190) {}
     
         void useUniqueAbility() override {
             if (health < 50) {
