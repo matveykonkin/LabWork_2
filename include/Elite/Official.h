@@ -6,7 +6,7 @@
 class Official : public Entity {
 public:
     Official();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

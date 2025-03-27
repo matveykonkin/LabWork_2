@@ -6,7 +6,7 @@
 class Robot : public Entity {
 public:
     Robot();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

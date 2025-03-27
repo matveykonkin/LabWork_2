@@ -6,7 +6,7 @@
 class Drone : public Entity {
 public:
     Drone();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

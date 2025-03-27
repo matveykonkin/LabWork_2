@@ -1,5 +1,4 @@
 #include "ZombiPolice.h"
-#include "Entity.h"
 #include <iostream>
 
 class ZombiPolice : public Entity {

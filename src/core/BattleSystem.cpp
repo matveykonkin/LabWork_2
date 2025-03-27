@@ -1,4 +1,4 @@
-#include "BattleSystem.h"
+#include "include/core/BattleSystem.h"
 #include "Player.h"
 #include "AI.h"
 #include "Entity.h"

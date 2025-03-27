@@ -6,7 +6,7 @@
 class Banker : public Entity {
 public:
     Banker();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

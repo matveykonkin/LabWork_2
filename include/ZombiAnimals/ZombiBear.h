@@ -6,7 +6,7 @@
 class ZombiBear : public Entity {
 public:
     ZombiBear();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

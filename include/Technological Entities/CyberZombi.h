@@ -6,7 +6,7 @@
 class CyberZombi : public Entity {
 public:
     CyberZombi();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

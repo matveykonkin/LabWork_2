@@ -6,7 +6,7 @@
 class Courier : public Entity {
 public:
     Courier();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

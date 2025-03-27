@@ -6,7 +6,7 @@
 class HugeBusinessman : public Entity {
 public:
     HugeBusinessman();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

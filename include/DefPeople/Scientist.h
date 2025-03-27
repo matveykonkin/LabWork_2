@@ -6,7 +6,7 @@
 class Scientist : public Entity {
 public:
     Scientist();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 

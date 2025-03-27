@@ -21,3 +21,15 @@ void Entity::output() const {
 void Entity::useUniqueAbility() {
     std::cout << name << " использует способность: " << uniqueAbility << std::endl;
 }
+
+void Entity::setSkipTurn(bool skip) {
+    skipTurn = skip;
+}
+
+void Entity::setAbilitiesLocked(bool locked) {
+    abilitiesLocked = locked; 
+}
+
+void Entity::setAttack(int value) {
+    attack = value;
+}

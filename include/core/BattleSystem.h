@@ -1,7 +1,7 @@
 #ifndef BATTLESYSTEM_H
 #define BATTLESYSTEM_H
 
-#include "Entity.h"  
+#include "/home/matvey/Документы/SimpleList/matveyKonkin83/LabWork_2/include/Entity.h"
 #include "Player.h"  
 #include "AI.h"      
 

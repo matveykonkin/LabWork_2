@@ -1,7 +1,7 @@
 #ifndef AI_H  
 #define AI_H  
 
-#include "Entity.h"  
+#include "/home/matvey/Документы/SimpleList/matveyKonkin83/LabWork_2/include/Entity.h"
 
 class AI : public Entity {  
 private:
