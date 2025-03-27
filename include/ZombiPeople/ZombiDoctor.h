@@ -6,7 +6,7 @@
 class ZombiDoctor : public Entity {
 public:
     ZombiDoctor();
-    void useUniqueAbility() override;
+    void useUniqueAbility(Entity* target) override;
 };
 
 #endif 
