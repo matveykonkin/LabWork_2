@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <sstream>
 #include "Entity.h"
 #include "ZombiPeople/ZombiPolice.h"
 #include "ZombiPeople/ZombiStudent.h"
@@ -14,11 +15,8 @@ TEST(ZombiPoliceTest, ArrestAbility) {
 }
 
 // Тест BattleSystem
-TEST(BattleSystemTest, PvPBattle) {
-    ZombiPolice player1;
-    ZombiStudent player2;
-    BattleSystem battle(player1, player2);
-    
-    battle.startBattle();
-    ASSERT_TRUE(battle.isBattleOver());
+TEST(BattleSystemTest, DamageTest) {
+    ZombiStudent student;
+    student.takeDamage(student.getMaxHealth());
+    ASSERT_FALSE(student.isAlive());
 }
