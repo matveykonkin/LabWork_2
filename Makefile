@@ -1,25 +1,45 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Iinclude
+CXXFLAGS = -std=c++14 -Wall -Wextra -Iinclude 
+GTEST_FLAGS = -lgtest -lgtest_main -lpthread
 
-SRC_DIR = src
+SRC_DIR = src/entities/ZombiPeople
 TEST_DIR = tests
-BIN_DIR = bin
+BUILD_DIR = build
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
-TEST_FILES = $(wildcard $(TEST_DIR)/*.cpp)
+$(shell mkdir -p $(BUILD_DIR))
 
-TEST_EXEC = $(BIN_DIR)/card_rpg_tests
+REQUIRED_SRCS = \
+    $(wildcard src/Entity.cpp) \
+    $(wildcard $(SRC_DIR)/ZombiPolice.cpp) \
+    $(wildcard $(SRC_DIR)/ZombiStudent.cpp) \
+	$(wildcard src/core/BattleSystem.cpp) \
+	$(wildcard src/core/Player.cpp) \
+	$(wildcard src/core/AI.cpp)
 
-all: $(TEST_EXEC)  
+ifeq ($(REQUIRED_SRCS),)
+    $(error Не найдены исходные файлы в $(SRC_DIR))
+endif
 
-$(TEST_EXEC): $(TEST_FILES) $(SRC_FILES)
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^ -lgtest -lgtest_main -pthread
+TEST_SRC = $(wildcard $(TEST_DIR)/test_main.cpp)
+ifeq ($(TEST_SRC),)
+    $(error Не найден тестовый файл $(TEST_DIR)/test_main.cpp)
+endif
+
+TEST_EXEC = $(BUILD_DIR)/run_tests
+
+all: $(TEST_EXEC)
+
+$(TEST_EXEC):
+	@echo "Компиляция тестов из: $(REQUIRED_SRCS) $(TEST_SRC)"
+	$(CXX) $(CXXFLAGS) -o $@ $(REQUIRED_SRCS) $(TEST_SRC) $(GTEST_FLAGS)
+	@echo "Сборка завершена. Исполняемый файл: $(TEST_EXEC)"
 
 test: $(TEST_EXEC)
+	@echo "Запуск тестов..."
 	./$(TEST_EXEC)
 
 clean:
-	rm -rf $(BIN_DIR)
+	rm -rf $(BUILD_DIR)
+	@echo "Очистка завершена"
 
 .PHONY: all test clean
