@@ -11,7 +11,10 @@ $(shell mkdir -p $(BUILD_DIR))
 REQUIRED_SRCS = \
     $(wildcard src/Entity.cpp) \
     $(wildcard $(SRC_DIR)/ZombiPolice.cpp) \
-    $(wildcard $(SRC_DIR)/ZombiStudent.cpp)
+    $(wildcard $(SRC_DIR)/ZombiStudent.cpp) \
+	$(wildcard src/core/BattleSystem.cpp) \
+	$(wildcard src/core/Player.cpp) \
+	$(wildcard src/core/AI.cpp)
 
 ifeq ($(REQUIRED_SRCS),)
     $(error Не найдены исходные файлы в $(SRC_DIR))

@@ -1,7 +1,7 @@
 #ifndef PLAYER_H  
 #define PLAYER_H  
 
-#include "/home/matvey/Документы/SimpleList/matveyKonkin83/LabWork_2/include/Entity.h"
+#include "Entity.h"
 #include "CoinSystem.h"  
 
 class Player : public Entity {  

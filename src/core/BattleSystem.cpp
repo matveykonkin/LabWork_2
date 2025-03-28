@@ -1,6 +1,6 @@
-#include "include/core/BattleSystem.h"
-#include "Player.h"
-#include "AI.h"
+#include "core/BattleSystem.h"
+#include "core/Player.h"
+#include "core/AI.h"
 #include "Entity.h"
 #include <iostream>
 #include <limits>
