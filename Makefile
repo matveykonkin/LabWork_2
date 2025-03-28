@@ -9,7 +9,7 @@ BUILD_DIR = build
 $(shell mkdir -p $(BUILD_DIR))
 
 REQUIRED_SRCS = \
-    $(wildcard $(SRC_DIR)/Entity.cpp) \
+    $(wildcard src/Entity.cpp) \
     $(wildcard $(SRC_DIR)/ZombiPolice.cpp) \
     $(wildcard $(SRC_DIR)/ZombiStudent.cpp)
 

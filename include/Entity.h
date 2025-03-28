@@ -19,11 +19,11 @@ public:
     void takeDamage(int damage);
     void output() const;
     virtual void useUniqueAbility(Entity* target) = 0;
-    virtual void useUniqueAbility();
     virtual void setAbilitiesLocked(bool locked);
     virtual void setAttack(int attack);
     virtual void setSkipTurn(bool skip);
     virtual bool isAlive() const;
+    virtual ~Entity();
 
     bool shouldSkipTurn() const { 
         return skipTurn; 

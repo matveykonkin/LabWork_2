@@ -4,6 +4,8 @@
 Entity::Entity(const std::string& name, int health, int attack, const std::string& uniqueAbility, int price)
     : name(name), health(health), attack(attack), uniqueAbility(uniqueAbility), price(price) {}
 
+Entity::~Entity() {}
+
 void Entity::takeDamage(int damage) {
     health -= damage;
     if (health < 0) health = 0;
@@ -18,9 +20,7 @@ void Entity::output() const {
     std::cout << name << " (Health: " << health << ", Attack: " << attack << ")" << std::endl;
 }
 
-void Entity::useUniqueAbility() {
-    std::cout << name << " использует способность: " << uniqueAbility << std::endl;
-}
+
 
 void Entity::setSkipTurn(bool skip) {
     skipTurn = skip;
