@@ -15,7 +15,7 @@ public:
     bool spendCoins(int amount);  
     bool canUseAbility() const;  
     void markAbilityUsed();  
-    void useUniqueAbility();
+    void useUniqueAbility(Entity* target) override;
 };  
 
 #endif  
