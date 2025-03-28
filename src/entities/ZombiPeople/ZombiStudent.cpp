@@ -1,4 +1,4 @@
-#include "/home/matvey/Документы/SimpleList/matveyKonkin83/LabWork_2/include/ZombiPeople/ZombiStudent.h"
+#include "ZombiPeople/ZombiStudent.h"
 #include <iostream>
 
 ZombiStudent::ZombiStudent() :

@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -Iinclude 
+CXXFLAGS = -std=c++14 -Wall -Wextra -Iinclude 
 GTEST_FLAGS = -lgtest -lgtest_main -lpthread
 
 SRC_DIR = src/entities/ZombiPeople

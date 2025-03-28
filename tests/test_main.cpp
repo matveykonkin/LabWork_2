@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Entity.h"
-#include "/home/matvey/Документы/SimpleList/matveyKonkin83/LabWork_2/include/ZombiPeople/ZombiPolice.h"
-#include "/home/matvey/Документы/SimpleList/matveyKonkin83/LabWork_2/include/ZombiPeople/ZombiStudent.h"
+#include "ZombiPeople/ZombiPolice.h"
+#include "ZombiPeople/ZombiStudent.h"
 
 // Тест способности ZombiPolice
 TEST(ZombiPoliceTest, ArrestAbility) {
