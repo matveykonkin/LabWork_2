@@ -2,11 +2,13 @@
 #define CHILD_H
 
 #include "Entity.h"
+class BattleSystem;
 
 class Child : public Entity {
+    BattleSystem* battleSystem;
 public:
-    Child();
-    void useUniqueAbility(Entity* target) override;
+    Child(BattleSystem* battle);
+    void useUniqueAbility(Entity* target, BattleSystem* battleSystem);
 };
 
 #endif 
