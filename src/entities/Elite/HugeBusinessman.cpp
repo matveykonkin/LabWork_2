@@ -2,12 +2,11 @@
 #include "CoinSystem.h"
 #include <iostream>
 
-class HugeBusinessman : public Entity {
-    public:
-        HugeBusinessman() : Entity("HugeBusinessman", 90, 12, "Инвестиция", 135) {}
-    
-        void HugeBusinessman::useUniqueAbility(CoinSystem coinSystem) {
-            std::cout << name << " использует способность: " << uniqueAbility << " (увеличивает доход от монет)" << std::endl;
-            coinSystem.setIncomeMultiplier(1.2);
-        }
-    };
+HugeBusinessman::HugeBusinessman() : 
+    Entity("HugeBusinessman", 90, 12, "Инвестиция", 135) {}
+
+void HugeBusinessman::useUniqueAbility(Entity* target) {
+    std::cout << name << " использует способность: " << uniqueAbility << " (восстанавливает 35 здоровья)" << std::endl;
+        health += 35;
+        if (health > 90) health = 90; 
+}
