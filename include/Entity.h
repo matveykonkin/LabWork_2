@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <string>
+class BattleSystem;
 
 class Entity {
 protected:

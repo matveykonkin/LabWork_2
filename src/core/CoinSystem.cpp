@@ -1,4 +1,4 @@
-#include "CoinSystem.h"
+#include "core/CoinSystem.h"
 
 void CoinSystem::addCoins(int amount) {
     if (amount < 0) {

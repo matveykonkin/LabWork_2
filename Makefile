@@ -9,12 +9,17 @@ BUILD_DIR = build
 $(shell mkdir -p $(BUILD_DIR))
 
 REQUIRED_SRCS = \
-    $(wildcard src/Entity.cpp) \
-    $(wildcard $(SRC_DIR)/ZombiPolice.cpp) \
-    $(wildcard $(SRC_DIR)/ZombiStudent.cpp) \
+	$(wildcard $(SRC_DIR)/ZombiPolice.cpp) \
 	$(wildcard src/core/BattleSystem.cpp) \
+	$(wildcard src/core/CardSystem.cpp) \
+	$(wildcard src/core/CoinSystem.cpp) \
+	$(wildcard src/entities/Elite/Banker.cpp) \
+	$(wildcard src/entities/DefPeople/Bodybuilder.cpp) \
+    $(wildcard src/Entity.cpp) \
+    $(wildcard $(SRC_DIR)/ZombiStudent.cpp) \
 	$(wildcard src/core/Player.cpp) \
-	$(wildcard src/core/AI.cpp)
+	$(wildcard src/core/AI.cpp) \
+	$(wildcard src/Enemy/enemyExample.cpp)
 
 ifeq ($(REQUIRED_SRCS),)
     $(error Не найдены исходные файлы в $(SRC_DIR))
