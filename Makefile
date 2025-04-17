@@ -18,7 +18,8 @@ REQUIRED_SRCS = \
     $(wildcard src/Entity.cpp) \
     $(wildcard $(SRC_DIR)/ZombiStudent.cpp) \
 	$(wildcard src/core/Player.cpp) \
-	$(wildcard src/core/AI.cpp)
+	$(wildcard src/core/AI.cpp) \
+	$(wildcard src/Enemy/enemyExample.cpp)
 
 ifeq ($(REQUIRED_SRCS),)
     $(error Не найдены исходные файлы в $(SRC_DIR))

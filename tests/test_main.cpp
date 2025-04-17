@@ -9,6 +9,7 @@
 #include "core/CardSystem.h"
 #include "core/CoinSystem.h"
 #include "core/Player.h"
+#include "Enemy/EnemyFactory.h"
 
 // Тест способности ZombiPolice
 TEST(ZombiPoliceTest, ArrestAbility) {
@@ -86,4 +87,44 @@ TEST(BodybuilderTest, InitialStats) {
     ASSERT_EQ(bb.getAttack(), 15);
     ASSERT_EQ(bb.getAbilityName(), "Суперсила");
     ASSERT_EQ(bb.getPrice(), 210);
+}
+
+// Тест врагов разных уровней сложности
+TEST(EnemyTest, WeakEnemyStats) {
+    WeakZombiStudent enemy;
+    ASSERT_EQ(enemy.getHealth(), 50);
+    ASSERT_EQ(enemy.getAttack(), 3);
+    ASSERT_EQ(enemy.getAbilityName(), "Шпаргалка");
+}
+
+TEST(EnemyTest, StrongEnemyAbility) {
+    EliteZombiProfessor enemy;
+    testing::internal::CaptureStdout();
+    enemy.useUniqueAbility(nullptr);
+    std::string output = testing::internal::GetCapturedStdout();
+    
+    ASSERT_TRUE(output.find("Экзаменом") != std::string::npos);
+}
+
+TEST(EnemyFactoryTest, EasyEnemyCount) {
+    auto enemies = EnemyFactory::createEasyEnemies();
+    ASSERT_EQ(enemies.size(), 3);
+    for (auto enemy : enemies) {
+        ASSERT_NE(dynamic_cast<WeakZombiStudent*>(enemy), nullptr);
+        delete enemy;
+    }
+}
+
+TEST(EnemyFactoryTest, HardEnemyMix) {
+    auto enemies = EnemyFactory::createHardEnemies();
+    int professors = 0;
+    
+    for (auto enemy : enemies) {
+        if (dynamic_cast<EliteZombiProfessor*>(enemy)) {
+            professors++;
+        }
+        delete enemy;
+    }
+    
+    ASSERT_EQ(professors, 2);
 }
