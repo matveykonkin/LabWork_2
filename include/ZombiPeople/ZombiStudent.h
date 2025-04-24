@@ -1,12 +1,31 @@
-#ifndef ZOMBI_STUDENT_H
-#define ZOMBI_STUDENT_H
+/**
+ * @file ZombiStudent.h
+ * @brief Заголовочный файл класса ZombiStudent (студент-зомби).
+ */
 
-#include "Entity.h"
-
-class ZombiStudent : public Entity {
-public:
-    ZombiStudent();
-    void useUniqueAbility(Entity* target) override;
-};
-
-#endif 
+ #ifndef ZOMBI_STUDENT_H
+ #define ZOMBI_STUDENT_H
+ 
+ #include "Entity.h"
+ 
+ /**
+  * @class ZombiStudent
+  * @brief Класс, реализующий зомби-студента.
+  * @details Наследуется от Entity и реализует способность, характерную для студентов.
+  */
+ class ZombiStudent : public Entity {
+ public:
+     /**
+      * @brief Конструктор по умолчанию.
+      */
+     ZombiStudent();
+ 
+     /**
+      * @brief Использует уникальную способность зомби-студента.
+      * @param target Цель для атаки.
+      * @details Например, может "списывать", копируя способности цели.
+      */
+     void useUniqueAbility(Entity* target) override;
+ };
+ 
+ #endif
