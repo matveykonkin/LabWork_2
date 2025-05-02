@@ -1,13 +1,54 @@
-#include "HugeBusinessman.h"
-#include "CoinSystem.h"
+#include "Elite/HugeBusinessman.h"
+#include "Entity.h"
 #include <iostream>
+#include <stdexcept>
 
-class HugeBusinessman : public Entity {
-    public:
-        HugeBusinessman() : Entity("HugeBusinessman", 90, 12, "Инвестиция", 135) {}
-    
-        void HugeBusinessman::useUniqueAbility(CoinSystem coinSystem) {
-            std::cout << name << " использует способность: " << uniqueAbility << " (увеличивает доход от монет)" << std::endl;
-            coinSystem.setIncomeMultiplier(1.2);
-        }
-    };
+/**
+ * @brief Конструктор крупного бизнесмена
+ * @param name Имя бизнесмена
+ * @param health Здоровье бизнесмена
+ * @param attack Сила атаки бизнесмена
+ * @param ability Уникальная способность бизнесмена
+ * @param price Цена бизнесмена
+ */
+HugeBusinessman::HugeBusinessman(const std::string& name, int health, int attack,
+                                const std::string& ability, int price)
+    : Entity(name, health, attack, ability, price) {}
+
+/**
+ * @brief Обрабатывает получение урона.
+ * @param damage Количество полученного урона.
+ * @details Уменьшает здоровье на величину урона, но не ниже 0.
+ */
+void HugeBusinessman::takeDamage(int damage) {
+    if (damage < 0) {
+        throw std::invalid_argument("Урон не может быть отрицательным");
+    }
+    health -= damage;
+    if (health < 0) health = 0;
+}
+
+/**
+ * @brief Проверяет, жив ли бизнесмен.
+ * @return true, если здоровье больше 0, иначе false.
+ */
+bool HugeBusinessman::isAlive() const {
+    return health > 0;
+}
+
+/**
+ * @brief Использует уникальную способность бизнесмена
+ * @param target Цель способности
+ * @details Увеличивает атаку союзника на 50%
+ */
+void HugeBusinessman::useUniqueAbility(Entity* target) {
+    if (!target) {
+        throw std::invalid_argument("Цель не может быть nullptr");
+    }
+    if (!target->isAlive()) {
+        throw std::invalid_argument("Цель уже мертва");
+    }
+    std::cout << getName() << " использует способность: " << getAbilityName() 
+              << " (увеличивает атаку союзника)\n";
+    target->setAttack(target->getAttack() * 1.5);
+}
