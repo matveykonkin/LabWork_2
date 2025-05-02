@@ -1,50 +1,53 @@
+# Компилятор и флаги
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -Wextra -Iinclude 
-GTEST_FLAGS = -lgtest -lgtest_main -lpthread
+CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude
+LDFLAGS = 
 
-SRC_DIR = src/entities/ZombiPeople
-TEST_DIR = tests
-BUILD_DIR = build
+# Исходные файлы
+SRC_DIR = src
+SRCS = $(SRC_DIR)/main.cpp \
+       $(SRC_DIR)/Entity.cpp \
+       $(wildcard $(SRC_DIR)/core/*.cpp) \
+       $(wildcard $(SRC_DIR)/entities/DefPeople/*.cpp) \
+       $(wildcard $(SRC_DIR)/entities/ZombiPeople/*.cpp) \
+       $(wildcard $(SRC_DIR)/entities/TechnologicalEntities/*.cpp) \
+       $(wildcard $(SRC_DIR)/entities/ZombiAnimals/*.cpp) \
+       $(wildcard $(SRC_DIR)/entities/Elite/*.cpp)
 
-$(shell mkdir -p $(BUILD_DIR))
+# Объектные файлы
+OBJ_DIR = obj
+OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
-REQUIRED_SRCS = \
-	$(wildcard $(SRC_DIR)/ZombiPolice.cpp) \
-	$(wildcard src/core/BattleSystem.cpp) \
-	$(wildcard src/core/CardSystem.cpp) \
-	$(wildcard src/core/CoinSystem.cpp) \
-	$(wildcard src/entities/Elite/Banker.cpp) \
-	$(wildcard src/entities/DefPeople/Bodybuilder.cpp) \
-    $(wildcard src/Entity.cpp) \
-    $(wildcard $(SRC_DIR)/ZombiStudent.cpp) \
-	$(wildcard src/core/Player.cpp) \
-	$(wildcard src/core/AI.cpp) \
-	$(wildcard src/Enemy/enemyExample.cpp)
+# Исполняемый файл
+TARGET = game
 
-ifeq ($(REQUIRED_SRCS),)
-    $(error Не найдены исходные файлы в $(SRC_DIR))
-endif
+# Правила
+.PHONY: all clean directories
 
-TEST_SRC = $(wildcard $(TEST_DIR)/test_main.cpp)
-ifeq ($(TEST_SRC),)
-    $(error Не найден тестовый файл $(TEST_DIR)/test_main.cpp)
-endif
+all: directories $(TARGET)
 
-TEST_EXEC = $(BUILD_DIR)/run_tests
+directories:
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/core
+	@mkdir -p $(OBJ_DIR)/entities/DefPeople
+	@mkdir -p $(OBJ_DIR)/entities/ZombiPeople
+	@mkdir -p $(OBJ_DIR)/entities/TechnologicalEntities
+	@mkdir -p $(OBJ_DIR)/entities/ZombiAnimals
+	@mkdir -p $(OBJ_DIR)/entities/Elite
 
-all: $(TEST_EXEC)
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-$(TEST_EXEC):
-	@echo "Компиляция тестов из: $(REQUIRED_SRCS) $(TEST_SRC)"
-	$(CXX) $(CXXFLAGS) -o $@ $(REQUIRED_SRCS) $(TEST_SRC) $(GTEST_FLAGS)
-	@echo "Сборка завершена. Исполняемый файл: $(TEST_EXEC)"
-
-test: $(TEST_EXEC)
-	@echo "Запуск тестов..."
-	./$(TEST_EXEC)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(BUILD_DIR)
-	@echo "Очистка завершена"
+	rm -rf $(OBJ_DIR) $(TARGET)
 
-.PHONY: all test clean
+# Зависимости
+$(OBJ_DIR)/main.o: include/Entity.h include/core/Player.h include/core/AI.h include/core/BattleSystem.h
+$(OBJ_DIR)/Entity.o: include/Entity.h
+$(OBJ_DIR)/core/Player.o: include/core/Player.h include/Entity.h
+$(OBJ_DIR)/core/AI.o: include/core/AI.h include/Entity.h
+$(OBJ_DIR)/core/BattleSystem.o: include/core/BattleSystem.h include/core/Player.h include/core/AI.h include/Entity.h

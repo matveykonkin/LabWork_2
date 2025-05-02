@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['zombibear_2ecpp_48',['ZombiBear.cpp',['../ZombiBear_8cpp.html',1,'']]],
-  ['zombidoctor_2ecpp_49',['ZombiDoctor.cpp',['../ZombiDoctor_8cpp.html',1,'']]],
-  ['zombidog_2ecpp_50',['ZombiDog.cpp',['../ZombiDog_8cpp.html',1,'']]],
-  ['zombipigeon_2ecpp_51',['ZombiPigeon.cpp',['../ZombiPigeon_8cpp.html',1,'']]],
-  ['zombipolice_2ecpp_52',['ZombiPolice.cpp',['../ZombiPolice_8cpp.html',1,'']]],
-  ['zombistudent_2ecpp_53',['ZombiStudent.cpp',['../ZombiStudent_8cpp.html',1,'']]],
-  ['zombiteacher_2ecpp_54',['ZombiTeacher.cpp',['../ZombiTeacher_8cpp.html',1,'']]],
-  ['zombiwolf_2ecpp_55',['ZombiWolf.cpp',['../ZombiWolf_8cpp.html',1,'']]]
+  ['scientist_2ecpp_65',['Scientist.cpp',['../entities_2DefPeople_2Scientist_8cpp.html',1,'(Global Namespace)'],['../Entities_2Scientist_8cpp.html',1,'(Global Namespace)']]],
+  ['smallbusinessman_2ecpp_66',['SmallBusinessman.cpp',['../Elite_2SmallBusinessman_8cpp.html',1,'(Global Namespace)'],['../entities_2Elite_2SmallBusinessman_8cpp.html',1,'(Global Namespace)']]],
+  ['strongenemy_2ecpp_67',['StrongEnemy.cpp',['../StrongEnemy_8cpp.html',1,'']]],
+  ['student_2ecpp_68',['Student.cpp',['../Student_8cpp.html',1,'']]]
 ];

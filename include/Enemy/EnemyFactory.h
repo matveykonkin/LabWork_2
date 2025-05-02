@@ -1,22 +1,21 @@
 #pragma once
-#include "WeakEnemy.h"
-#include "StrongEnemy.h"
+#include "Enemy/WeakEnemy.h"
+#include "Enemy/StrongEnemy.h"
 #include <vector>
+#include <memory>
 
 class EnemyFactory {
 public:
-    static std::vector<Entity*> createEasyEnemies() {
-        return {
-            new WeakZombiStudent(),
-            new WeakZombiStudent(),
-            new WeakZombiStudent()
-        };
+    static std::vector<std::unique_ptr<Entity>> createEasyEnemies() {
+        std::vector<std::unique_ptr<Entity>> enemies;
+        enemies.push_back(std::make_unique<WeakZombiStudent>());
+        enemies.push_back(std::make_unique<WeakZombiStudent>());
+        return enemies;
     }
 
-    static std::vector<Entity*> createHardEnemies() {
-        return {
-            new EliteZombiProfessor(),
-            new EliteZombiProfessor(),
-        };
+    static std::vector<std::unique_ptr<Entity>> createHardEnemies() {
+        std::vector<std::unique_ptr<Entity>> enemies;
+        enemies.push_back(std::make_unique<EliteZombiProfessor>());
+        return enemies;
     }
 };

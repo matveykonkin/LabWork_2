@@ -4,11 +4,13 @@
 
 class WeakZombiStudent : public Entity {
 public:
-    WeakZombiStudent() : 
-        Entity("Слабый студент", 50, 3, "Шпаргалка", 20) {}
+    WeakZombiStudent();
     
-    void useUniqueAbility(Entity* target) override {
-        std::cout << "Кидает шпаргалку! (-2 урона)" << std::endl;
-        target->takeDamage(2);
-    }
+    // Реализация чисто виртуальных методов Entity
+    void takeDamage(int damage) override;
+    bool isAlive() const override;
+    void useUniqueAbility(Entity* target) override;
+    
+    // Дополнительный метод для работы с целью
+    void attackTarget(Entity* target);
 };
